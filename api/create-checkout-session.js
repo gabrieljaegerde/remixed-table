@@ -25,7 +25,10 @@ export default async function handler(req, res) {
   if (!process.env.STRIPE_SECRET_KEY) {
     return sendJson(res, 500, { error: 'Payments are not configured yet.' });
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    timeout: 20000,        // ms per request (default 80s is longer than the fn can run)
+    maxNetworkRetries: 2,  // ride out transient connection blips
+  });
 
   let body;
   try { body = await readJson(req); } catch { body = {}; }
@@ -93,7 +96,13 @@ export default async function handler(req, res) {
     return sendJson(res, 200, { url: session.url });
   } catch (err) {
     // Log server-side; return a safe message to the browser.
-    console.error('[create-checkout-session]', err && err.message);
-    return sendJson(res, 502, { error: 'Could not start checkout. Please try again.' });
+    console.error('[create-checkout-session]', err && err.type, err && err.code, err && err.message);
+    const payload = { error: 'Could not start checkout. Please try again.' };
+    // TEMP debug: surface the underlying Stripe error type when ?debug=1 is set.
+    // Remove once checkout is confirmed working.
+    if (req.url && req.url.includes('debug=1')) {
+      payload.debug = { type: err && err.type, code: err && err.code, message: err && err.message };
+    }
+    return sendJson(res, 502, payload);
   }
 }
