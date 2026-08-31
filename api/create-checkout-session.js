@@ -95,14 +95,18 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.create(params);
     return sendJson(res, 200, { url: session.url });
   } catch (err) {
-    // Log server-side; return a safe message to the browser.
-    console.error('[create-checkout-session]', err && err.type, err && err.code, err && err.message);
+    // Unwrap the underlying OS/network error Stripe wraps inside a connection error.
+    const underlying = (err && (err.detail || err.cause)) || null;
+    const info = {
+      type: err && err.type,
+      code: (err && err.code) || (underlying && (underlying.code || underlying.errno)),
+      message: err && err.message,
+      cause: underlying && (underlying.message || String(underlying)),
+    };
+    console.error('[create-checkout-session]', JSON.stringify(info));
     const payload = { error: 'Could not start checkout. Please try again.' };
-    // TEMP debug: surface the underlying Stripe error type when ?debug=1 is set.
-    // Remove once checkout is confirmed working.
-    if (req.url && req.url.includes('debug=1')) {
-      payload.debug = { type: err && err.type, code: err && err.code, message: err && err.message };
-    }
+    // TEMP debug: surface the underlying cause when ?debug=1 is set. Remove later.
+    if (req.url && req.url.includes('debug=1')) payload.debug = info;
     return sendJson(res, 502, payload);
   }
 }
