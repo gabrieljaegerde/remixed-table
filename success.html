@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank you — REMIXED TABLE</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="REMIXED TABLE — home">
+        <svg class="table-mark" viewBox="0 0 100 74" aria-hidden="true" focusable="false"><ellipse cx="50" cy="26" rx="42" ry="17" fill="currentColor"/><rect x="20" y="40" width="3.4" height="30" transform="rotate(9 21.7 55)" fill="currentColor"/><rect x="40" y="42" width="3.4" height="30" transform="rotate(3 41.7 57)" fill="currentColor"/><rect x="57" y="42" width="3.4" height="30" transform="rotate(-3 58.7 57)" fill="currentColor"/><rect x="77" y="40" width="3.4" height="30" transform="rotate(-9 78.7 55)" fill="currentColor"/></svg>
+        <span class="mark">Remixed Table</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap" style="max-width:64ch;">
+        <p class="eyebrow">Confirmed</p>
+        <h1 class="display">A place is saved for you.</h1>
+        <div id="order-detail" class="event-card" style="grid-template-columns:1fr;background:var(--paper);margin-top:1.6rem;">
+          <div class="stack">
+            <p class="muted" id="order-line">Confirming your order…</p>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:1.6rem;">A receipt is on its way to your email. Field guides and prompt decks arrive as a download link; event bookings arrive as a confirmation with everything you need to bring.</p>
+        <p class="pullquote" style="margin-top:2rem;">Come to the table. Bring what you notice.</p>
+        <div class="cta-row" style="margin-top:2rem;">
+          <a class="btn" href="index.html">Back to the studio <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn--quiet" href="visits.html">See more visits</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-bottom" style="margin-top:0;border-top:none;">
+      <span>A nomadic studio · Selected in-person, international &amp; online collaborations</span>
+      <span>© 2026 Remixed Table</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('session_id');
+      var line = document.getElementById('order-line');
+      var fmt = function (minor, cur) {
+        try { return new Intl.NumberFormat('en', { style: 'currency', currency: (cur || 'usd').toUpperCase(), maximumFractionDigits: 0 }).format((minor || 0) / 100); }
+        catch (e) { return '$' + Math.round((minor || 0) / 100); }
+      };
+      if (!id) { line.textContent = 'Thank you for your order.'; return; }
+      fetch('/api/order-status?session_id=' + encodeURIComponent(id))
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (o) {
+          if (o.itemName) {
+            line.innerHTML = '<strong style="color:var(--burgundy)">' + o.itemName + '</strong>'
+              + (o.amountTotal ? ' · ' + fmt(o.amountTotal, o.currency) : '')
+              + (o.mode === 'subscription' ? ' / month' : '')
+              + (o.email ? '<br><span class="small-caps-label">Receipt sent to ' + o.email + '</span>' : '');
+          } else {
+            line.textContent = 'Thank you — your order is confirmed.';
+          }
+        })
+        .catch(function () { line.textContent = 'Thank you — your order is confirmed.'; });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "remixed-table",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REMIXED TABLE — art and learning studio website with Stripe Checkout on Vercel.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "stripe": "^17.5.0"
+  }
+}
