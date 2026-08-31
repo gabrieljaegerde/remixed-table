@@ -25,7 +25,9 @@ export default async function handler(req, res) {
   if (!process.env.STRIPE_SECRET_KEY) {
     return sendJson(res, 500, { error: 'Payments are not configured yet.' });
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  // .trim() guards against a trailing newline/space pasted into the env var,
+  // which would otherwise put an invalid char in the Authorization header.
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY.trim(), {
     timeout: 20000,        // ms per request (default 80s is longer than the fn can run)
     maxNetworkRetries: 2,  // ride out transient connection blips
   });

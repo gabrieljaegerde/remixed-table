@@ -17,11 +17,12 @@ export default async function handler(req, res) {
     return sendJson(res, 405, { error: 'Method not allowed' });
   }
 
-  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  const secret = process.env.STRIPE_WEBHOOK_SECRET && process.env.STRIPE_WEBHOOK_SECRET.trim();
   if (!process.env.STRIPE_SECRET_KEY || !secret) {
     return sendJson(res, 500, { error: 'Webhook not configured.' });
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  // .trim() guards against a stray newline/space pasted into the env var.
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY.trim());
 
   let event;
   try {
