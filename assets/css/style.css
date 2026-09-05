@@ -269,7 +269,7 @@ section{ padding-block:var(--section-y); }
   padding-bottom:clamp(3rem,8vw,7rem);
   position:relative;
 }
-.hero-grid{ display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vw,4rem); }
+.hero-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.6rem,4vw,2.6rem); justify-items:start; }
 .hero h1{ max-width:16ch; }
 .hero .hero-sub{
   text-transform:uppercase; letter-spacing:.14em; font-size:var(--step-0);
@@ -280,7 +280,7 @@ section{ padding-block:var(--section-y); }
   color:var(--burgundy); max-width:26ch;
 }
 .hero-image-ph{
-  margin:0 0 1.6rem; aspect-ratio:16/9; width:100%; max-width:640px;
+  margin:0; aspect-ratio:16/9; width:100%; max-width:720px;
   display:flex; align-items:center; justify-content:center;
   border:1px dashed var(--line); border-radius:6px; background:var(--blush);
 }
