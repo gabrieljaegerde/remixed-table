@@ -265,12 +265,17 @@ section{ padding-block:var(--section-y); }
 
 /* ---- Hero -------------------------------------------------------------- */
 .hero{
-  padding-top:clamp(3rem,8vw,7rem);
-  padding-bottom:clamp(3rem,8vw,7rem);
+  padding-top:clamp(1.5rem,3.5vw,2.75rem);
+  padding-bottom:clamp(2rem,4vw,3.25rem);
   position:relative;
 }
-.hero-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.6rem,4vw,2.6rem); justify-items:start; }
-.hero h1{ max-width:16ch; }
+.hero-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.1rem,2.6vw,1.8rem); justify-items:start; }
+.hero h1.hero-title{
+  max-width:none;
+  font-size:clamp(2.3rem,4.6vw,3.4rem);
+  line-height:1.05;
+}
+.hero-title span{ display:block; }
 .hero .hero-sub{
   text-transform:uppercase; letter-spacing:.14em; font-size:var(--step-0);
   color:var(--charcoal); max-width:34ch; font-weight:500; margin-top:.4rem;
@@ -280,7 +285,7 @@ section{ padding-block:var(--section-y); }
   color:var(--burgundy); max-width:26ch;
 }
 .hero-image-ph{
-  margin:0; aspect-ratio:16/9; width:100%; max-width:720px;
+  margin:0; aspect-ratio:16/9; width:100%; max-width:440px;
   display:flex; align-items:center; justify-content:center;
   border:1px dashed var(--line); border-radius:6px; background:var(--blush);
 }
