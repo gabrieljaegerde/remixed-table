@@ -26,7 +26,7 @@ export const CATALOG = {
   },
   'ticket-salient-series': {
     mode: 'payment',
-    name: 'Salient — Shadows & Edges',
+    name: 'Inner Landscapes — Shadows & Edges',
     description: '4 Saturdays · Ages 7–10 · materials included',
     amount: 115,
     kind: 'ticket',
@@ -43,11 +43,11 @@ export const CATALOG = {
 
   // ---- Paid field guides & digital products (one-off, delivered digitally)
   'guide-salient-at-home': {
-    mode: 'payment', name: 'Salient at Home', description: 'Printable field guide (PDF)',
+    mode: 'payment', name: 'Inner Landscapes at Home', description: 'Printable field guide (PDF)',
     amount: 6, kind: 'digital', maxQuantity: 1,
   },
   'guide-onus-educators': {
-    mode: 'payment', name: 'Onus for Educators', description: 'Framework & unit-planning kit (PDF)',
+    mode: 'payment', name: 'Imaginary Worlds for Educators', description: 'Framework & unit-planning kit (PDF)',
     amount: 10, kind: 'digital', maxQuantity: 1,
   },
   'guide-inner-landscapes-deck': {
@@ -59,7 +59,7 @@ export const CATALOG = {
     amount: 8, kind: 'digital', maxQuantity: 1,
   },
   'prompt-salient-pack': {
-    mode: 'payment', name: 'Salient Prompt Pack', description: 'Downloadable prompt pack',
+    mode: 'payment', name: 'Inner Landscapes Prompt Pack', description: 'Downloadable prompt pack',
     amount: 6, kind: 'digital', maxQuantity: 1,
   },
   'workshop-recording': {

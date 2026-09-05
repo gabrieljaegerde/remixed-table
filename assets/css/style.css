@@ -279,6 +279,15 @@ section{ padding-block:var(--section-y); }
   font-family:var(--serif); font-style:italic; font-size:var(--step-1);
   color:var(--burgundy); max-width:26ch;
 }
+.hero-image-ph{
+  margin:0 0 1.6rem; aspect-ratio:16/9; width:100%; max-width:640px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px dashed var(--line); border-radius:6px; background:var(--blush);
+}
+.hero-image-ph span{
+  font-family:var(--head); text-transform:uppercase; letter-spacing:.2em;
+  font-size:.75rem; color:var(--charcoal); opacity:.55;
+}
 .hero-table{ position:relative; }
 .hero-table svg{ width:min(420px,80%); height:auto; }
 
