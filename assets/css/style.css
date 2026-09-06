@@ -394,7 +394,7 @@ section{ padding-block:var(--section-y); }
 
 /* ---- Archival image plates -------------------------------------------- */
 .plate{
-  position:relative; overflow:hidden; border-radius:var(--radius);
+  position:relative; overflow:hidden; border-radius:var(--radius); margin:0;
   background:linear-gradient(135deg,#e5dcd3,#d8cabf 60%,#cdbcb0);
   aspect-ratio:4/5; display:block; text-decoration:none; color:inherit;
 }
