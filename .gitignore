@@ -12,3 +12,11 @@ node_modules/
 
 # OS
 .DS_Store
+
+# Large source assets (unoptimized originals — use assets/images/HOMEPAGE/web/ instead)
+REMIXED TABLE _ Website Layout*.pdf
+assets/images/HOMEPAGE/*.jpg
+assets/images/HOMEPAGE/*.JPG
+assets/images/HOMEPAGE/*.PNG
+assets/images/HOMEPAGE/*.heic
+assets/images/HOMEPAGE/Backup.jpg
