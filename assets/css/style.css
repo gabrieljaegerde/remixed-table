@@ -89,27 +89,31 @@ button{ font:inherit; cursor:pointer; }
 .skip-link:focus{ top:0; }
 
 /* ---- Typography classes ----------------------------------------------- */
-/* Section label — one consistent size/style for every numbered title (01, 02, 03 …) */
+/* Section title — an editorial chapter marker (rule + index) sits above the title */
 .eyebrow{
+  display:block;
   font-family:var(--head); font-weight:700;
-  font-size:clamp(2rem,4.5vw,3.4rem); line-height:1.05; letter-spacing:-.015em;
-  text-transform:none;
-  color:var(--burgundy);
-  display:flex; align-items:baseline; gap:.55rem;
-  margin:0 0 .55rem;
+  font-size:clamp(2.1rem,4.4vw,3.3rem); line-height:1.03; letter-spacing:-.025em;
+  text-transform:none; color:var(--burgundy);
+  margin:0 0 .5rem;
 }
 .eyebrow .idx{
-  font-variant-numeric:tabular-nums;
-  font-size:.4em; font-weight:600; letter-spacing:.06em;
-  color:var(--charcoal); opacity:.45;
+  display:flex; align-items:center; gap:.85rem;
+  font-family:var(--sans); font-variant-numeric:tabular-nums;
+  font-size:.85rem; font-weight:400; letter-spacing:.24em;
+  color:var(--burgundy); opacity:.75;
+  margin-bottom:1.15rem;
+}
+.eyebrow .idx::before{
+  content:""; width:2.4rem; height:1px; background:currentColor; opacity:.55; flex:0 0 auto;
 }
 .eyebrow::after{ display:none; }
-/* Section subheading — one consistent style, aligned under every label */
+/* Section subheading — a quiet deck in the body face, distinct from the display title */
 .section-sub{
-  font-family:var(--head); font-weight:500; font-style:italic;
-  font-size:var(--step-1); line-height:1.3; letter-spacing:0;
-  color:var(--charcoal); text-transform:none;
-  margin:0 0 1.4rem; max-width:var(--measure);
+  font-family:var(--sans); font-weight:400; font-style:normal;
+  font-size:var(--step-1); line-height:1.45; letter-spacing:.005em;
+  color:var(--charcoal); opacity:.72; text-transform:none;
+  margin:0 0 1.6rem; max-width:46ch;
 }
 
 h1,h2,h3,h4{ font-family:var(--head); color:var(--burgundy); font-weight:700; margin:0 0 .5em; }
@@ -276,7 +280,7 @@ section{ padding-block:var(--section-y); }
 }
 .hero-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,3vw,2.2rem); justify-items:start; align-items:center; }
 @media (min-width:860px){
-  .hero-grid{ grid-template-columns:1.05fr .95fr; gap:clamp(2rem,4.5vw,4rem); align-items:stretch; }
+  .hero-grid{ grid-template-columns:1.02fr .98fr; gap:clamp(2rem,4.5vw,4.5rem); align-items:center; }
   .hero-copy{ order:1; align-self:center; }
   .hero-image{ order:2; }
 }
@@ -311,7 +315,7 @@ section{ padding-block:var(--section-y); }
   position:relative; margin:0; width:100%; max-width:460px;
 }
 .hero-image img{
-  width:100%; aspect-ratio:4/5; object-fit:cover;
+  width:100%; aspect-ratio:1/1; object-fit:cover;
   border-radius:var(--radius); display:block;
   position:relative; z-index:1;
 }
@@ -331,8 +335,8 @@ section{ padding-block:var(--section-y); }
   pointer-events:none;
 }
 @media (min-width:860px){
-  .hero-image{ max-width:none; height:100%; align-self:stretch; }
-  .hero-image img{ height:100%; aspect-ratio:4/5; }
+  .hero-image{ max-width:none; align-self:center; }
+  .hero-image img{ aspect-ratio:1/1; height:auto; }
   .hero-image::before{ transform:translate(20px,20px); }
 }
 .hero-table{ position:relative; }
@@ -346,25 +350,33 @@ section{ padding-block:var(--section-y); }
 }
 @media (min-width:800px){ .doors{ grid-template-columns:repeat(3,1fr); } }
 .door{
-  background:var(--cream); padding:clamp(1.8rem,3vw,2.8rem);
-  text-decoration:none; color:inherit; display:flex; flex-direction:column; gap:1rem;
-  min-height:clamp(280px,34vw,360px); transition:background-color .4s ease;
+  background:var(--cream); padding:clamp(1.5rem,2.4vw,2.1rem);
+  text-decoration:none; color:inherit; display:flex; flex-direction:column; gap:.55rem;
+  min-height:clamp(300px,36vw,380px); transition:background-color .4s ease;
   position:relative;
 }
 .door:hover,.door:focus-visible{ background:var(--paper); }
-.door .door-idx{ font-size:var(--step--1); letter-spacing:.16em; text-transform:uppercase; color:var(--burgundy); font-weight:600; opacity:.9; }
-.door h3{ margin:0; }
-.door p{ color:var(--charcoal); margin:0; }
 .door-media{
-  width:100%; aspect-ratio:4/3; object-fit:cover;
-  border-radius:var(--radius); margin-top:auto; display:block;
+  width:100%; aspect-ratio:5/4; object-fit:cover;
+  border-radius:var(--radius); display:block; margin-bottom:1.1rem;
 }
+.door .door-tag{
+  font-family:var(--sans); font-size:var(--step--1); letter-spacing:.02em;
+  color:var(--burgundy); opacity:.7; font-weight:400;
+}
+.door h3{ margin:.1rem 0 .15rem; font-size:var(--step-1); line-height:1.16; }
+.door p{ color:var(--charcoal); opacity:.82; margin:0; font-size:var(--step-0); max-width:34ch; }
 .door .door-go{
-  text-transform:uppercase; letter-spacing:.14em; font-size:var(--step--1);
-  color:var(--burgundy); display:inline-flex; align-items:center; gap:.5rem;
+  margin-top:auto; padding:1.2rem 0 2px;
+  font-family:var(--sans); font-size:var(--step--1); letter-spacing:.02em;
+  color:var(--burgundy); align-self:flex-start; position:relative;
 }
-.door .arw{ transition:transform .35s ease; }
-.door:hover .arw{ transform:translateX(5px); }
+.door .door-go::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:left;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.door:hover .door-go::after,.door:focus-visible .door-go::after{ transform:scaleX(1); }
 
 /* ---- Event / visit card ------------------------------------------------ */
 .event-card{
